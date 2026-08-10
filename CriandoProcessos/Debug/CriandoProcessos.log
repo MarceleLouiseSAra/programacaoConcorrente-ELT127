@@ -1,0 +1,3 @@
+﻿  CriandoProcessos.cpp
+CriandoProcessos.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  CriandoProcessos.vcxproj -> C:\Users\Luiz\delt\disciplinas\atr\programas\CriandoProcessos\Debug\CriandoProcessos.exe

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CriandoProcessos", "CriandoProcessos.vcxproj", "{8002B033-EDAD-48CA-86D8-ED50B7E724DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8002B033-EDAD-48CA-86D8-ED50B7E724DA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8002B033-EDAD-48CA-86D8-ED50B7E724DA}.Debug|Win32.Build.0 = Debug|Win32
+		{8002B033-EDAD-48CA-86D8-ED50B7E724DA}.Release|Win32.ActiveCfg = Release|Win32
+		{8002B033-EDAD-48CA-86D8-ED50B7E724DA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1E79F7F-E1B8-4909-A164-4D52DBD83B4B}
+	EndGlobalSection
+EndGlobal
