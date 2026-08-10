@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TimerQueue", "TimerQueue.vcxproj", "{11ED9C1D-BDB7-4DFA-A552-62F9E6438F50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11ED9C1D-BDB7-4DFA-A552-62F9E6438F50}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11ED9C1D-BDB7-4DFA-A552-62F9E6438F50}.Debug|Win32.Build.0 = Debug|Win32
+		{11ED9C1D-BDB7-4DFA-A552-62F9E6438F50}.Release|Win32.ActiveCfg = Release|Win32
+		{11ED9C1D-BDB7-4DFA-A552-62F9E6438F50}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4442B7F0-A012-4AA9-A79A-0C5BFC2141BC}
+	EndGlobalSection
+EndGlobal
