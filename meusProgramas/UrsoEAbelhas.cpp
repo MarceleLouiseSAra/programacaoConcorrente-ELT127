@@ -292,7 +292,7 @@ void *Thread_Urso(void *arg) {  /* Thread representando o urso */
         // ACRESCENTE OS COMANDOS DE SINCRONIZACAO VIA SEMAFOROS ONDE NECESSARIO
 
 		// Aguarda ser acordado pelas abelhas
-		Wait(&AcordaUrso);
+		Wait(&AcordaUrso); // O consumo de CPU de Thread_Urso, no estado de blocked, é zero
 		// como as abelhas nunca chamam Wait(&AcordaUrso), 
 		// Thread_Urso é a única thread na fila de espera do semáforo
 
