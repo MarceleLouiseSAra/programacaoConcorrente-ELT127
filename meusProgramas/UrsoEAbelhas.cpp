@@ -59,6 +59,7 @@ void *Thread_Urso(void *arg);
 pthread_mutexattr_t MutexAttr;  // Atributos de mutex
 pthread_mutex_t AcessaPote;		// Mutex para proteger acesso ao pote de mel
 sem_t AcordaUrso;				// Semáforo para acordar o urso
+sem_t AcordaAbelas; 			// Semáforo para acordar as abelas
 
 int nTecla;						// Variável que armazena a tecla digitada para sair
 int nPorcoes = 0;				// Número de porcoes depositadas no pote de mel
@@ -200,6 +201,7 @@ int main(){
     } while (nTecla != ESC);
 
 	Signal(&AcordaUrso); // Senão, Thread_Urso fica travada no Wait
+	Signal(&AcordaAbelas);
 	
 	// --------------------------------------------------------------------------
 	// Aguarda termino das threads secundarias
@@ -262,11 +264,11 @@ void *Thread_Abelha(void *arg) {  /* Threads representando as abelhas */
 				// Conquistando o semáforo acordaUrso
 				Signal(&AcordaUrso); // incrementa o contador do semáforo e a thread Thread_Urso entra na fila de execução
 				printf("%sAbelha %02ld encheu o pote: acorda o urso e espera o pote esvaziar-se...%s\n", HLYELLOW, i, RESET);
+				Wait(&AcordaAbelas); // Abelhas vão dormir até o urso comer o pote de mel
 			}
 		}
 		// Liberando o mutex AcessaPote
 		UnLockMutex(&AcessaPote);
-
 		// Dorme um tempo apenas para facilitar visualização das mensagens
 		//Sleep(100);
 		usleep(100000);
@@ -300,15 +302,16 @@ void *Thread_Urso(void *arg) {  /* Thread representando o urso */
 		printf("%sUrso dormindo...%s\n", HLRED, RESET);
 
 		// Conquistando o mutex AcessaPote
-		LockMutex(&AcessaPote);
+		// LockMutex(&AcessaPote); // desnecessário por causa do if (nPorcoes < MAX_PORCOES) {}
 
 		// Esvazia o pote de mel
 		printf("%sUrso acordou!%s\n", HLRED, RESET);
 		printf("%sUrso consumiu todo o mel do pote%s\n", HLRED, RESET);
 		nPorcoes = 0;
-
+		
 		// Liberando o mutex AcessaPote
-		UnLockMutex(&AcessaPote);
+		// UnLockMutex(&AcessaPote); // desnecessário por causa do if (nPorcoes < MAX_PORCOES) {}
+		Signal(&AcordaAbelas); // Acorda as abelhas
 
 	} while (nTecla != ESC);
 
