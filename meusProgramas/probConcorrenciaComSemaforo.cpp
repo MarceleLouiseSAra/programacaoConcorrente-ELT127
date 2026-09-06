@@ -29,19 +29,32 @@ int getch_linux(void) {
     return ch;
 }
 
+void Wait(sem_t *Semaforo) {
+	int status;
+	status = sem_wait(Semaforo);
+	if (status != 0) {
+		printf("Erro na obtencao do semaforo! Codigo = %x\n", errno);
+		exit(0);
+	}
+}
+
+void Signal(sem_t *Semaforo) {
+	int status;
+	status = sem_post(Semaforo);
+	if (status != 0) {
+		printf("Erro na liberacao do semaforo! Codigo = %x\n", errno);
+		exit(0);
+	}
+}
+
 void* TestFunc(void* arg) {
-    int i = 0, index = 0, status = 0;
+    int i = 0, index = 0;
 
     index = (int)(intptr_t) arg; // parsing
 
     do {
 
-        status = sem_wait(&MeuSemaforo);
-
-        if (status != 0) {
-            printf("Erro na obtenção do semáforo! Código: %x\n", status);
-            return 0;
-        }
+        Wait(&MeuSemaforo);
 
         for (i = 0; i < 100000; i++) {
             contador += 1;
@@ -49,12 +62,7 @@ void* TestFunc(void* arg) {
         printf("Thread %d: contador = %u\n", index, contador);
         sleep(0.1);
 
-        status = sem_post(&MeuSemaforo);
-
-        if (status != 0 ) {
-            printf("Erro inesperado na liberação do semáfoto! Código: %x\n", status);
-            return  0;
-        }
+        Signal(&MeuSemaforo);
 
     } while (tecla != ESC);
 
@@ -71,7 +79,7 @@ int main() {
 	// Criação do semáforo binário
 	// --------------------------------------------------------------------------
 
-    status = sem_init(&MeuSemaforo, 0 ,0); // semáforo binário
+    status = sem_init(&MeuSemaforo, 0 , 1); // semáforo binário
 
     if (status != 0) {
         printf("Erro na inicialização do semáfoto! Código: %x\n", status);
@@ -101,13 +109,14 @@ int main() {
 	// Leitura do teclado
 	// --------------------------------------------------------------------------
 
+    printf("Tecle <ESC> para terminar\n");
+
     do {
-        printf("Tecle <ESC> para terminar\n");
         tecla = getch_linux();
 
     } while (tecla != ESC);
 
-    sem_post(&MeuSemaforo);
+    Signal(&MeuSemaforo);
 
 	// --------------------------------------------------------------------------
 	// Aguarda termino das threads secundarias
